@@ -67,7 +67,7 @@
 	\subfigure[]{\includegraphics[width=3.3in]{Blockcraft-1-Original}}
 	\qquad
  	\subfigure[]{\includegraphics[width=3.3in]{Blockcraft-1-Blur}}
-  	\caption{Die linke Abbildung zeigt eine Aufnahme der Beispielszene, bei der die Distanz zur Schärfeebene auf $75.0\si{m}$ eingestellt und sowohl die Brennweite als auch die Größe der Linse an die Eigenschaften des menschlichen Auges angepasst wurden. Innerhalb der rechten Abbildung wurde die Größe der Linse so angepasst, dass ein Abstand von $6.0\si{cm}$ zur Schärfeebene simuliert wird. Nach Anwendung des in diesem Paper vorgestellten Algorithmus zur Echtzeitberechnung von Tiefenschärfe wirken die Bäume und das Terrain innerhalb der Szene merklich miniaturisiert. }
+  	\caption{Die linke Abbildung zeigt eine Aufnahme der Beispielszene, bei der die Distanz zur Schärfeebene auf $\SI{75.0}{\meter}$ eingestellt und sowohl die Brennweite als auch die Größe der Linse an die Eigenschaften des menschlichen Auges angepasst wurden. Innerhalb der rechten Abbildung wurde die Größe der Linse so angepasst, dass ein Abstand von $\SI{6.0}{\centi\meter}$ zur Schärfeebene simuliert wird. Nach Anwendung des in diesem Paper vorgestellten Algorithmus, wirken die Bäume und das Terrain innerhalb der Szene merklich miniaturisiert. }
 	\label{teaser}
 }
 
@@ -76,7 +76,7 @@
 \def\abstractname{Abstract}
 \begin{abstract}
 
-Innerhalb des vorliegenden Papers wird ein Algorithmus vorgestellt, der die Manipulation von wahrgenommenen Größen- und Abstandsverhältnissen in Echtzeit ermöglicht. Hierzu wird ein Modell zur Berechnung von Tiefenschärfe eingeführt, das mithilfe von Shadern und einem Grafikchip effizient zur Berechnung verwendet werden kann. Die Anwendung des Algorithmus für die Erzeugung des Tilt-Shift-Effektes unter Berücksichtigung der menschlichen Wahrnehmung lieferte gute Ergebnisse und wurde anhand einer speziellen, fraktal generierten Beispielszene erprobt und validiert. Auch der Vergleich mit Offline-Verfahren war zufriedenstellend und zeigte lediglich die erwarteten, durch die Unterschiedlichkeiten der Berechnung bedingten, Differenzen.
+Innerhalb des vorliegenden Papers wird ein Algorithmus vorgestellt, der die Manipulation von wahrgenommenen Größen- und Abstandsverhältnissen in Echtzeit ermöglicht. Hierzu wird ein Modell zur Berechnung von Tiefenschärfe eingeführt, das mithilfe von Shadern und einem Grafikchip effizient zur Berechnung verwendet werden kann. Die Anwendung des Algorithmus für die Erzeugung des sogenannten Tilt-Shift-Effektes unter Berücksichtigung der menschlichen Wahrnehmung lieferte gute Ergebnisse und wurde anhand einer speziellen, fraktal generierten Beispielszene erprobt und validiert. Auch der Vergleich mit Offline-Verfahren war zufriedenstellend und zeigte lediglich die erwarteten, durch die Unterschiedlichkeiten der Berechnung bedingten, Differenzen.
 
 % \begin{eqnarray}
 % x & \ll & y_{1} + \cdots + y_{n} \\
@@ -98,9 +98,9 @@ Unschärfe in Fotografien und Grafiken kann wahrgenommene Größen- und Abstands
 
 Für die Realisierung des Tilt-Shift-Effektes existieren drei bewährte Umsetzungsmöglichkeiten: die Verwendung von Tilt-Shift-Objektiven, die Anwendung eines vertikalen Unschärfefilters durch Postprocessing und die realitätsnahe, physikalische Berechnung von Tiefenschärfe. Während die ersten beiden Möglichkeiten bei Fotografien leicht angewendet werden können, sind für die realitätsnahe Berechnung Tiefeninformationen eine Grundvoraussetzung. Da bei der Entwicklung von Echtzeit-3D-Applikationen Tiefeninformationen ein grundlegender Bestandteil sind und die Ausrichtung eines vertikalen Unschärfefilters geschickt gewählt werden muss, eignet sich in diesem Szenario eine realitätsnahe Berechnung.
 
-Abbildung \ref{teaser} (a) und Abbildung \ref{teaser} (b) zeigen die Ergebnisse nach einer Echtzeit-Tiefenschärfe-Berechnung angewandt auf eine fraktal generierte Beispielszene. Die Parameter wurden für die Generierung der Abbildungen so gewählt, dass, unter Berücksichtigung der Eigenschaften des menschlichen Auges, eine fokussierte Distanz von $75.0\si{m}$ auf $6.0\si{cm}$ simuliert wird.
+Abbildung \ref{teaser} (a) und Abbildung \ref{teaser} (b) zeigen die Ergebnisse nach einer Echtzeit-Tiefenschärfe-Berechnung angewandt auf eine fraktal generierte Beispielszene. Die Parameter wurden für die Generierung der Abbildungen so gewählt, dass, unter Berücksichtigung der Eigenschaften des menschlichen Auges, eine fokussierte Distanz von $\SI{75.0}{\meter}$ auf  $\SI{6.0}{\centi\meter}$
 
-Wie zu erkennen ist, eignen sich Echtzeitverfahren für die Erzeugung des Tilt-Shift-Effektes. Innerhalb des vorliegenden Papers wird ein einfacher Algorithmus beschrieben, der die Berechnung von Tiefenschärfe unter Berücksichtigung der menschlichen Wahrnehmung in Echtzeit ermöglicht. Durch dessen Anwendung können Größenverhältnisse betrachteter Szenen durch Defokussierung und Fokussierung manipuliert und an gewünschte Größenverhältnisse angepasst werden. Abschließend werden die Ergebnisse validiert und mit einer offline Reproduktion der Ergebnisse verglichen.
+Wie zu erkennen ist, eignen sich Echtzeitverfahren für die Erzeugung des Tilt-Shift-Effektes. Innerhalb des vorliegenden Papers wird ein einfacher Algorithmus beschrieben, der die Berechnung von Tiefenschärfe unter Berücksichtigung der menschlichen Wahrnehmung in Echtzeit ermöglicht. Durch dessen Anwendung können Größenverhältnisse betrachteter Szenen durch Defokussierung und Fokussierung manipuliert und an gewünschte Größenverhältnisse angepasst werden. Abschließend werden die Ergebnisse validiert und mit einer offline Reproduktion verglichen.
 
 \section{Hintergrund}
 
@@ -117,14 +117,14 @@ Andererseits hat sich der Tilt-Shift-Effekt zur Umkehrung des Effekts etabliert.
 
 Statt auf Tilt-Shift-Objektive zurückzugreifen, kann der beschriebene Effekt gleichwertig mithilfe von linearen Weichzeichnungsfiltern reproduziert werden~\cite{McCloskey:2009ij}. Für die Umsetzung eignet sich ein linearer, vertikaler Grauverlauf zur Beschreibung der Unschärfeintensität für den jeweiligen Bildpunkt. Abbildung \ref{flickr} zeigt eine Aufnahme der Shibuya Kreuzung in Tokio nach Anwendung des Tilt-Shift-Effektes. Dieser wurde auf die beschriebene Art und Weise, nach der Aufnahme des Bildes mit einer handelsüblichen Kamera, durch Postprocessing in Adobe Photoshop CS5 hinzugefügt. Durch die Leichtigkeit und die Wirkung des Effektes, erfreut sich die Erzeugung von Miniaturbildern reger Beliebtheit \cite{Flickr:2011hc}.
 
-Der Einfluss von Tiefenschärfe und speziell die Unschärfe innerhalb einer Szene auf wahrgenommene Größen- und Abstandsverhältnisse ist unverkennbar. Dennoch kann die Distanz von Objekten zu dem Punkt der Aufnahme einer Fotografie oder Grafik nicht allein anhand der Intensität der Unschärfe rekonstruiert werden. Held. et. al. haben hierzu ein Modell vorgestellt, dass für die Rekonstruktion des Abstandes zur Fokusebene zusätzlich zur Unschärfe relative Distanzen innerhalb der Szene berücksichtigt. Dieses Modell wurde anhand eines semi-automatischen Algorithmus, der Fotografien durch Anwendung von Tiefenschärfe akkurat in gewünschte Größenverhältnisse versetzt, und einem psychophysiologischen Experiment validiert~\cite{Held:2010cr}.
+Der Einfluss von Unschärfe innerhalb einer Szene auf wahrgenommene Größen- und Abstandsverhältnisse ist unverkennbar. Dennoch kann die Distanz von Objekten zu dem Punkt der Aufnahme einer Fotografie oder Grafik nicht allein anhand der Intensität der Unschärfe rekonstruiert werden. Held. et. al. haben hierzu ein Modell vorgestellt, dass für die Rekonstruktion des Abstandes zur Fokusebene zusätzlich zur Unschärfe relative Distanzen innerhalb der Szene berücksichtigt. Dieses Modell wurde anhand eines semi-automatischen Algorithmus, der Fotografien durch Anwendung von Tiefenschärfe akkurat in gewünschte Größenverhältnisse versetzt, und einem psychophysiologischen Experiment validiert~\cite{Held:2010cr}.
 
 \subsection{Tiefenschärfe in Echtzeit-3D-Applikationen}
 Die Berechnung von Tiefenschärfe ist trotz Hardwarebeschleunigung ein rechenaufwändiger Prozess~\cite{Held:2010cr}. Dennoch hat sich der Einsatz von Tiefenschärfe als stilistisches Mittel innerhalb von Computerspielen etabliert und findet zudem bei der Entwicklung von Echtzeit-3D-Applikationen in verschiedenen Formen und Ausführungen Anwendung.
 
-Die einfachste Variante nutzt die Berechnung des Circle of Confusion (kurz CoC) anhand der Linsengleichung als Grundlage. Dieser gibt für einen betrachteten Punkt unter Berücksichtigung der Brennweite, der Distanz zur Schärfeebene, der relativen Distanz zur Schärfeebene für den betrachteten Punkt und der Größe der Linse, den Durchmesser der Unschärfe an. Nach der Ermittlung des CoC-Wertes wird ein Unschärfefilter mit dem entsprechenden Durchmesser auf jeden Bildpunkt angewandt \cite{Dudash:2004ul,Scheuermann:2004wd}. In Computerspielen wird dieser Effekt meist als stilistisches Mittel verwendet, sodass statt der Linsengleichung lineare Grauverläufe zwischen bestimmten Distanzen interpoliert werden \cite{Earll-Hammon:2007qf,Filion:2008ve}. Zur Verbesserung des Effekts existieren verschiedene Ansätze, um durch das Verfahren bedingte Artefakte zu minimieren.
+Die erste Variante nutzt die Berechnung des Circle of Confusion (kurz CoC) anhand der Linsengleichung als Grundlage. Dieser gibt für einen betrachteten Punkt unter Berücksichtigung der Brennweite, der Distanz zur Schärfeebene, der relativen Distanz zur Schärfeebene für den betrachteten Punkt und der Größe der Linse, den Durchmesser der Unschärfe an. Nach der Ermittlung des CoC-Wertes wird ein Unschärfefilter mit dem entsprechenden Durchmesser auf jeden Bildpunkt angewandt \cite{Dudash:2004ul,Scheuermann:2004wd}. In Computerspielen wird dieser Effekt meist als stilistisches Mittel verwendet, sodass statt der Linsengleichung lineare Grauverläufe zwischen bestimmten Distanzen interpoliert werden \cite{Earll-Hammon:2007qf,Filion:2008ve}. Zur Verbesserung des Effekts existieren verschiedene Ansätze, um durch das Verfahren bedingte Artefakte zu minimieren.
 
-Unter Verwendung des Circle of Confusion kommt in der Praxis zudem ein rechenaufwändigeres Verfahren zum Einsatz. Bei diesem wird die sogenannte Wärmeleitungsgleichung (engl. heat equation), eine partielle Differentialgleichung, zur Approximation von Unschärfe in einem Punkt verwendet~\cite{Bertalmio:2004lq,Kass:2006dq}. Ausgehend von einem Lochkameramodell wird eine Wärmeverteilung entsprechend den CoC-Werten berechnet \cite{Kass:2006dq}. Für einen großen CoC-Durchmesser wird die thermische Leitfähigkeit des Materials als hoch modelliert und für einen entsprechend kleinen CoC-Durchmesser gering. Dieses Verfahren wird beispielsweise von den Pixar Animation Studios für die Generierung von Echtzeit-Previews genutzt.
+Unter Verwendung des Circle of Confusion kommt in der Praxis zudem eine rechenaufwändigere Technik zum Einsatz. Bei diesem wird die sogenannte Wärmeleitungsgleichung (engl. heat equation), eine partielle Differentialgleichung, zur Approximation von Unschärfe in einem Punkt verwendet~\cite{Bertalmio:2004lq,Kass:2006dq}. Ausgehend von einem Lochkameramodell wird eine Wärmeverteilung entsprechend den CoC-Werten berechnet \cite{Kass:2006dq}. Für einen großen CoC-Durchmesser wird die thermische Leitfähigkeit des Materials als hoch modelliert und für einen entsprechend kleinen CoC-Durchmesser gering. Dieses Verfahren wird beispielsweise von den Pixar Animation Studios für die Generierung von Echtzeit-Previews genutzt.
 
 Die Publikationen von Sungkil Lee et. al. präsentieren weitere Verfahren zur Echtzeitberechnung von Tiefenschärfe und Unschärfe. Bei einem dieser Verfahren wird der Effekt durch den Einsatz von anisotrophischer Filterung und MIP-Maps erzeugt, wobei mögliche Artefakte durch den Einsatz eines Gauß-Filters unterdrückt werden \cite{Lee:2008nx}. In einem weiteren Verfahren wird die Szene innerhalb eines einzigen Renderingdurchlaufes in mehrere Schichten aufgeteilt. Die Berechnung wird abschließend ähnlich zu Multi-View-Synthesis-Verfahren durchgeführt \cite{Lee:2009eu}. Die aktuelleste Publikation beschreibt ein Renderingsystem, das speziell für die Generierung von Defokussierungs- sowie Unschärfeeffekten entwickelt wurde und zudem die Simulation von verschiedenen Linsenmodellen ermöglicht \cite{Lee:2010oq}.
 
@@ -137,7 +137,7 @@ Die Berechnung des Circle of Confusion bildet die Grundlage für den in diesem P
 	\label{eq:lens}
 \end{equation}
 
-Bei gewöhnlichen Bildaufnahmegeräten liegt die Bildebene parallel zur Linse, sodass Punkte in einer Distanz von $z_0 = ({f^{-1} - {s_0}^{-1}})^{-1}$ im Fokus liegen und somit vollständig scharf dargestellt werden. Die Ebene in der Distanz $z_0$ zur Linse wird als Schärfeebene bezeichnet. Punkte, die nicht auf der Schärfeebene liegen, werden entsprechend unscharf dargestellt. Die Intensität der Unschärfe kann durch den Durchmesser $c$ des Unschärfekreises auf der Bildebene beschrieben werden. Das Verhältnis $\frac{z_1}{z_0}$ (Formel \ref{eq:d}), sprich das Verhältnis von einem Punkt auf der Schärfeebene und einem Punkt, der nicht auf dieser liegt, wird als relative Distanz $d$ bezeichnet. Bei Berücksichtigung des Durchmessers $A$ des Objektivs bzw. der Linse ergibt sich für ein Objekt in der Distanz $z_1$ die in Formel \ref{eq:coc} dargestellte Gleichung.
+Bei gewöhnlichen Bildaufnahmegeräten liegt die Bildebene parallel zur Linse, sodass Punkte in einer Distanz von $z_0 = ({f^{-1} - {s_0}^{-1}})^{-1}$ im Fokus liegen und somit vollständig scharf dargestellt werden. Die Ebene in der Distanz $z_0$ zur Linse wird als Schärfeebene bezeichnet. Punkte, die nicht auf der Schärfeebene liegen, werden entsprechend unscharf dargestellt. Die Intensität der Unschärfe kann durch den Durchmesser $c$ des Unschärfekreises auf der Bildebene beschrieben werden. Das Verhältnis $\frac{z_1}{z_0}$ (Formel \ref{eq:d}), sprich das Verhältnis von einem Punkt auf der Schärfeebene und einem Punkt, der nicht auf dieser liegt, wird als relative Distanz $d$ bezeichnet. Bei Berücksichtigung des Durchmessers $A$ der Linse ergibt sich für ein Objekt in der Distanz $z_1$ die in Formel \ref{eq:coc} dargestellte Gleichung.
 
 \begin{align}
 	 \label{eq:d}
@@ -155,7 +155,7 @@ Als Tiefenschärfe (engl. depth of field) wird der Bereich im Umkreis zur Schär
 \label{fig:coc}
 \end{figure}
 
-Der zuvor beschriebene Tilt-Shift- bzw. Miniaturisierungseffekt lässt sich mit dem Verhältnis zwischen $z_0$ und $c_1$ erklären. Durch Verringerung von $z_0$, sprich einer Reduzierung des Abstandes zwischen Linse und Schärfeebene, erhöht sich der Durchmesser des Circle of Confusion $c_1$ bei Betrachtung eines Bildpunktes in der relativen Distanz $d$. Entsprechend erzeugt eine aus der Nähe aufgenommene Szene mehr Unschärfe als eine hochskalierte Version der Szene, aufgenommen aus größeren Distanz.
+Der zuvor beschriebene Tilt-Shift- bzw. Miniaturisierungseffekt lässt sich mit dem Verhältnis zwischen $z_0$ und $c_1$ erklären. Durch Verringerung von $z_0$, sprich einer Reduzierung des Abstandes zwischen Linse und Schärfeebene, erhöht sich der Durchmesser des Circle of Confusion $c_1$ bei Betrachtung eines Bildpunktes in der relativen Distanz $d$. Entsprechend erzeugt eine aus der Nähe aufgenommene Szene mehr Unschärfe als eine hochskalierte Version der Szene, aufgenommen aus größerer Distanz.
 
 \section{Konzept}
 
@@ -172,7 +172,7 @@ Für die eigentliche Berechnung des Echtzeit-Tiefenschärfe-Effektes sind folgen
 
 Anhand der ermittelten Werte für den Circle of Confusion wird im letzten Schritt der eigentliche Tiefenschärfe-Effekt berechnet. Hierzu muss für jeden Bildpunkt entsprechend dem zuvor ermittelten Diameter $c_{x,y}$ ein Unschärfefilter angewendet werden. Die Schwierigkeit liegt an dieser Stelle darin, dass der Durchmesser und die Intensität des Filters variabel wählbar sein muss.
 
-\subsection{Auswahl eines Echtzeit-Weichzeichnungsfilters}
+\subsection{Nutzung einer Poisson-Disk-Verteilung als Weichzeichnungsfilter}
 
 Um den Vorgang möglichst effizient zu gestalten, ist von der Verwendung eines Gauß-Filters abzusehen. Für jeden Diameter $c_{x,y}$ müsste an dieser Stelle eine entsprechend große Filter-Matrix bereitgestellt oder dynamisch berechnet werden. Eine Mehrfachausführung des Gauß-Filters ist ebenfalls keine realistische Lösung.
 
@@ -199,7 +199,7 @@ Die Farbwerte der entsprechenden Punkte können an dieser Stelle ermittelt und a
 \subsection{Simulation des Tilt-Shift-Effektes}
 \label{sec:tilt}
 
-Um möglichst wirklichkeitsgetreue Ergebnisse zu erzielen, müssen die Eigenschaften des menschlichen Auges berücksichtigt werden, sodass sich unter Verwendung von Formel \ref{eq:coc} für $A = 4.6\si{mm}$ und $s_0 = 17.0\si{mm}$ ergeben \cite{Held:2010cr}. 
+Um möglichst wirklichkeitsgetreue Ergebnisse zu erzielen, müssen die Eigenschaften des menschlichen Auges berücksichtigt werden, sodass sich bei Betrachtung von Formel \ref{eq:coc} für $A = \SI{4.6}{\milli\meter}$ und $s_0 = \SI{17.0}{\milli\meter}$ ergeben \cite{Held:2010cr}. 
 
 Für die Simulation des Tilt-Shift-Effektes muss nun die Größe der Linse, ausgehend von den ursprünglichen Dimensionen, angepasst werden. Bei Simulation einer Distanz, die um Faktor $m$ verschoben wird, ergibt sich das in Formel \ref{eq:zhat} und \ref{eq:ahat} beschriebene Verhältnis~\cite{Held:2010cr}.
 
@@ -210,23 +210,23 @@ Für die Simulation des Tilt-Shift-Effektes muss nun die Größe der Linse, ausg
 	\hat A &= \frac{A}{m}
 \end{align}
 
-Geht man beispielsweise von $s_0 = 0.017\si{m}$ sowie $A = 0.0046\si{m}$ und einer Szene, die aus einer Distanz $z_0 = 75.0\si{m}$ aufgenommen wurde, aus, muss für die Simulation einer Distanz von $\hat z_0 = 0.06\si{m}$ eine Linse mit $\hat A = 5.75\si{m}$ verwendet werden.
+Geht man beispielsweise von $s_0 = \SI{0.017}{\meter}$ sowie $A = \SI{0.0046}{\meter}$ und einer Szene, die aus einer Distanz $z_0 = \SI{75.0}{\meter}$ aufgenommen wurde, aus, muss für die Simulation einer Distanz von $\hat z_0 = \SI{0.06}{\meter}$ eine Linse mit $\hat A = \SI{5.75}{\meter}$ verwendet werden.
 
 \subsection{Abbildung der Größenverhältnisse}
 \label{sec:proportions}
 
-Unter Berücksichtigung der zuvor beschriebenen Parameter für die menschliche Wahrnehmung und unter Verwendung von Formel \ref{eq:coc}, kann der Durchmessers des Circle of Confusion bei einer Projektion auf die menschliche Netzhaut berechnet werden. Für eine Simulation muss die Verbindung zwischen dem beschriebenen Durchmesser des Poisson-Disk-Filters und dem Durchmesser des CoCs hergestellt werden. Hierzu wurden die Ergebnisbilder von Held et. al. betrachtet und der jeweilige Durchmesser des angewendeten Filters anhand eines Gauß-Weichzeichnungs-Filters approximiert \cite{Held:2010cr}. Mithilfe von Photoshop CS5 wurde für eine der beschriebenen Szenen aus einer simulierten Distanz $\hat z_0 = 0.06\si{m}$ mit $\hat A = 60.0\si{m}$, $z_0 = 785.0\si{m}$, $s_0 = 0.016\si{m}$ und $A = 0.0043\si{m}$ ein maximaler Unschärfe-Radius von $r = 4.6\si{px}$ ermittelt. Bei Anwendung des Poisson-Disk-Filters muss für den Durchmesser des maximalen CoCs $c_{\textnormal{max}} = 4.6 \cdot 2 = 9.2\si{px}$ gewählt werden.
+Unter Berücksichtigung der zuvor beschriebenen Parameter für die menschliche Wahrnehmung und Formel \ref{eq:coc}, kann der Durchmessers des Circle of Confusion bei einer Projektion auf die menschliche Netzhaut berechnet werden. Für eine Simulation muss die Verbindung zwischen dem beschriebenen Durchmesser des Poisson-Disk-Filters und dem Durchmesser des CoCs hergestellt werden. Hierzu wurden die Ergebnisbilder von Held et. al. betrachtet und der jeweilige Durchmesser des angewendeten Filters anhand eines Gauß-Weichzeichnungs-Filters approximiert \cite{Held:2010cr}. Mithilfe von Photoshop CS5 wurde für eine der beschriebenen Szenen aus einer simulierten Distanz $\hat z_0 = \SI{0.06}{\meter}$ mit $\hat A = \SI{60.0}{\meter}$, $z_0 = \SI{785.0}{\meter}$, $s_0 = \SI{0.017}{\meter}$ und $A = \SI{0.046}{\meter}$ ein maximaler Unschärfe-Radius von $r = \SI{4.6}{px}$ ermittelt. Bei Anwendung des Poisson-Disk-Filters muss für den Durchmesser des maximalen CoCs $c_{\textnormal{max}} = \SI{4.6}{px} \cdot 2 = \SI{9.2}{px}$ gewählt werden.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=3.35in]{DoF-Graph}
-\caption{Durchmesser des CoCs für eine Linsen der Größe $A \in [0.0\si{m},2.0\si{m}]$, $z1 \in [0.0\si{m},150.0\si{m}]$, $z_0 = 75.0\si{m}$, $s_0 = 0.017\si{m}$ bei Verwendung des Skalierungsfaktors $b = 28000$.}
+\caption{Durchmesser des CoCs für eine Linse der Größe $A \in [\SI{0.0}{\meter},\SI{2.0}{\meter}]$, $z1 \in [\SI{0.0}{\meter},\SI{150}{\meter}]$, $z_0 = \SI{75.0}{\meter}$, $s_0 =\SI{0.017}{\meter}$ bei Verwendung des Skalierungsfaktors $b = 28000$.}
 \label{abb:cocgraph}
 \end{figure}
 
-Anhand der Parameter der betrachteten Beispielszene kann der Skalierungsfaktor $b = 28000$ geschätzt werden. Unter Verwendung dessen entspricht die Intensität der dargestellten Unschärfe in etwa jener, die bei Betrachtung der Szene aus der simulierten Distanz tatsächlich entstehen würde~\cite{Held:2010cr}. Abbildung \ref{abb:cocgraph} zeigt den Durchmesser des CoC für ein Beispielszenario nach Anwendung der beschriebenen Skalierung.
+Anhand der Parameter der betrachteten Beispielszene kann der Skalierungsfaktor $b = 28000$ geschätzt werden. Unter Verwendung dessen entspricht die Intensität der dargestellten Unschärfe in etwa der, die bei Betrachtung der Szene aus der simulierten Distanz tatsächlich entstehen würde~\cite{Held:2010cr}. Abbildung \ref{abb:cocgraph} zeigt den Durchmesser des CoC für ein Beispielszenario nach Anwendung der beschriebenen Skalierung.
 
-\section{Realisierung des Echtzeit"=Tiefenschärfe"=Effektes mithilfe von Shadern}
+\section{Berechnung der Tiefenschärfe mithilfe von Shadern}
 
 Für die Implementierung des Tiefenschärfe-Effektes kommen zwei spezifische Fragment-Shader und ein Vertex-Shader zum Einsatz. Der Vertex-Shader ist für die Erzeugung der Tiefenwerte zuständig, während die zwei Fragment-Shader für die Berechnung der CoC-Werte und die Anwendung des eigentlichen Tiefenschärfe-Effektes zuständig sind. Anhand der ermittelten Werte wird eine Depth-Map bzw. CoC-Map erzeugt, wobei die CoC-Map an den finalen Shader für die Berechnung des Tiefenschärfe-Effektes übergeben wird. In diesem kommen die erzeugten Maps zusammen mit einer Textur, die ein Rendering der betrachteten Szene beinhaltet, zur Erzeugung des finalen Tiefenschärfe-Effektes zur Verwendung.
 
@@ -259,8 +259,7 @@ Unter Verwendung der zuvor beschriebenen Depth-Map (siehe Abschnitt \ref{sec:dep
 Listing \ref{lst:coc} zeigt eine exemplarische Implementierung eines entsprechenden Fragment-Shaders als Pseudocode.
 
 \begin{lstlisting}[caption=Pseudocode für den Fragment-Shader zur Berechnung der CoC-Map.,language=pseudo, label={lst:coc}]
-fragment program DepthFragmentShader with parameters currentPoint, depthSample, z0, a
-	set sceneDepth to 256
+fragment program DepthFragmentShader with parameters currentPoint, depthSample, z0, a, sceneDepth
 	// z0 entspricht z.B. 32.0
 	// a entspricht z.B. 0.0046
 	set s0 to 0.017
@@ -297,30 +296,30 @@ end
 
 \section{Ergebnisse}
 
-Die Referenzimplementierung wurde mithilfe von Ogre (Kurzform für \emph{Object-Oriented Graphics Rendering Engine})~\cite{Torus:2011vn} unter Verwendung von Mac OS 10.6.6 und OpenGL sowie der Shader-Hochsprache Cg (Kurzform für \emph{C for Graphics}) durchgeführt. Als Grafikkarte wurde eine ATI Radeon 5870 mit 1 GB Grafikspeicher eingesetzt. Der Testrechner besitzt einen Intel Xeon 6-Kern-Prozessor mit 3.33 GHz pro Kern, 12 Threads und insgesamt 8 GB Arbeitsspeicher. Für die Darstellung wurde ein Weitbildmonitor mit ein Bilddiagonalen von $24\si{zoll}$ und einer Auflösung von $1920\times1200\si{px}$ verwendet.
+Die Referenzimplementierung wurde mithilfe von Ogre (Kurzform für \emph{Object-Oriented Graphics Rendering Engine})~\cite{Torus:2011vn} unter Verwendung von Mac OS 10.6.6 und OpenGL sowie der Shader-Hochsprache Cg (Kurzform für \emph{C for Graphics}) durchgeführt. Als Grafikkarte wurde eine ATI Radeon 5870 mit 1 GB Grafikspeicher eingesetzt. Der Testrechner besitzt einen Intel Xeon 6-Kern-Prozessor mit 3.33 GHz pro Kern, 12 Threads und insgesamt 8 GB Arbeitsspeicher. Für die Darstellung wurde ein Weitbildmonitor mit ein Bilddiagonalen von $24''$ und einer Auflösung von $1920\times\SI{1200}{px}$ verwendet.
 
 Die beschriebenen Shader wurden mithilfe des von Ogre bereitgestellten Material- sowie Kompositor-Systems zugeordnet. Da die Tiefenwerte getrennt von der eigentlichen Berechnung ermittelt werden müssen, wird eine sogenannte Render-Queue-Invocation verwendet, bei der der Shader für die Erzeugung der Depth-Map auf die Szenen-Objekte angewendet und das Gesamtergebnis in Form einer Textur für die weitere Verwendung vorbereitet wird. Für den Unschärfefilter wurden 32 Poisson-Disk-Samples pro Frame verwendet, wobei der Tiefenschärfe-Shader zur Verstärkung des Effektes zweifach ausgeführt wird.
 
+Für die Demonstration wurde eine spezielle Szene entwickelt, die einen \emph{Lego-Effekt} vermitteln soll. Die Szene besteht aus vielen einzelnen, quadratischen Blöcken, die durch einen fraktalen Algorithmus (dem Square-Diamond-Algorithmus) zu einem Terrain ausgelegt werden. Zudem werden für bestimmte, zufällig ermittelte Regionen, Seen und Schneeabschnitte erzeugt sowie Bäume in der Landschaft platziert. Die Szene besteht aus Blätter-, Sand-, Dreck-, Schnee-, Gras-, Holz- sowie Wasserblöcken, die mit einfachen Texturen à $16\times\SI{16}{px}$ versehen wurden. Die Dimensionen eines Blockes wurden so gewählt, dass die Proportionen geschätzt einem halben Meter in der realen Welt entsprechen. Bäume besitzen eine maximale Höhe von  $\approx \SI{6.00}{\meter}$. Der Stil der Beispielszene orientiert sich am Computerspiel Minecraft~\cite{Mojang:2011zr}. Zur Verdeutlichung des Effektes kann sich innerhalb der Szene frei bewegt und bei Bedarf auf eine Vogelperspektive umgeschaltet werden. Abbildung \ref{abb:block} zeigt eine Aufnahme der Szene aus der Betrachtersicht.
+
 \begin{figure*}[p]
 	\centering
-	\subfigure[See mit $z_0 = 75.0\si{m}$ und $A = 4.6\si{mm}$]{\includegraphics[height=1.75in]{Blockcraft-1-Original}}
+	\subfigure[See mit $z_0 = \SI{75.0}{\meter}$ und $A = \SI{4.6}{\milli\meter}$]{\includegraphics[height=1.75in]{Blockcraft-1-Original}}
 	\qquad
-	\subfigure[Wald mit $z_0 = 75.0\si{m}$ und $A = 4.6\si{mm}$]{\includegraphics[height=1.75in]{Blockcraft-2-Original}}
+	\subfigure[Wald mit $z_0 = \SI{75.0}{\meter}$ und $A = \SI{4.6}{\milli\meter}$]{\includegraphics[height=1.75in]{Blockcraft-2-Original}}
 	\qquad
-	\subfigure[See mit $\hat z_0 = 6\si{cm}$ und $\hat A = 5.75\si{m}$]{\includegraphics[height=1.75in]{Blockcraft-1-Blur}}
+	\subfigure[See mit $\hat z_0 = \SI{6.0}{\centi\meter}$ und $\hat A = \SI{5.75}{\meter}$]{\includegraphics[height=1.75in]{Blockcraft-1-Blur}}
 	\qquad
-	\subfigure[Wald mit $\hat z_0 = 6\si{cm}$ und $\hat A = 5.75\si{m}$]{\includegraphics[height=1.75in]{Blockcraft-2-Blur}}
+	\subfigure[Wald mit $\hat z_0 = \SI{6.0}{\centi\meter}$ und $\hat A = \SI{5.75}{\meter}$]{\includegraphics[height=1.75in]{Blockcraft-2-Blur}}
 	\qquad
 	\subfigure[See mit linearem, vertikalem Linsenfilter]{\includegraphics[height=1.75in]{Blockcraft-1-Photoshop}}
 	\qquad
 	\subfigure[Wald mit linearem, vertikalem Linsenfiler]{\includegraphics[height=1.75in]{Blockcraft-2-Photoshop}}
-\caption{Zu Demonstration des Algorithmus wurden zunächst zwei Bilder aus einer großen Distanz von $75\si{m}$ aufgenommen (a und b). Im Anschluss daran wurde mithilfe des vorgestellten Algorithmus eine Simulation einer Distanz von ca. $6\si{cm}$ durch Vergrößerung der Linse durchgeführt (c und d). Zum Vergleich wurde ausgehend von der CoC-Karte der Ergebnisse ein linearer Grauverlauf abgeschätzt und zur Weichzeichnung mithilfe des Linsenfilters von Adobe Photoshop CS5 verwendet (e und f).}
+\caption{Zu Demonstration des Algorithmus wurden zunächst zwei Bilder aus einer großen Distanz von $\SI{75.0}{\meter}$ aufgenommen (a und b). Im Anschluss daran wurde mithilfe des vorgestellten Algorithmus eine Simulation einer Distanz von ca. $\SI{6.0}{\centi\meter}$ durch Vergrößerung der Linse durchgeführt (c und d). Zum Vergleich wurde ausgehend von der CoC-Karte der Ergebnisse ein linearer Grauverlauf abgeschätzt und zur Weichzeichnung mithilfe des Linsenfilters von Adobe Photoshop CS5 verwendet (e und f).}
 	\label{abb:res}
 \end{figure*}
 
-Für die Demonstration wurde eine spezielle Szene entwickelt, die einen \emph{Lego-Effekt} vermitteln soll. Die Szene besteht aus vielen einzelnen, quadratischen Blöcken, die durch einen fraktalen Algorithmus (dem Square-Diamond-Algorithmus) zu einem Terrain ausgelegt werden. Zudem werden für bestimmte, zufällig ermittelte Regionen, Seen und Schneeabschnitte erzeugt sowie Bäume in der Landschaft platziert. Die Szene besteht aus Blätter-, Sand-, Dreck-, Schnee-, Gras-, Holz- sowie Wasserblöcken, die mit einfachen Texturen à $16\times16\si{px}$ versehen wurden. Die Dimensionen eines Blockes wurden so gewählt, dass die Proportionen geschätzt einem halben Meter in der realen Welt entsprechen. Bäume besitzen eine maximale Höhe von ca. $6\si{m}$. Der Stil der Beispielszene orientiert sich am Computerspiel Minecraft~\cite{Mojang:2011zr}. Zur Verdeutlichung des Effektes kann sich innerhalb der Szene frei bewegt und bei Bedarf auf eine Vogelperspektive umgeschaltet werden. Abbildung \ref{abb:block} zeigt eine Aufnahme der Szene aus der Betrachtersicht.
-
-Abbildungen \ref{abb:res} (a) und (b) zeigen die Anwendung des Tiefenschärfe-Effektes aus einer Distanz von ca. $50\si{m}$ zur Oberfläche in zwei unterschiedlichen Regionen. Abbildung \ref{abb:res} (c) und (d) zeigen die gleichen Szenen bei Betrachtung aus einer simulierten Distanz von $6\si{cm}$ zur Schärfeebene. Abbildungen \ref{abb:res} (e) und (f) zeigen zum Vergleich die Anwendung eines linearen Unschärfefilters, der nach dem in Abbildung \ref{flickr} gezeigten Verfahren unter Verwendung erzeugt wurde.
+Abbildungen \ref{abb:res} (a) und (b) zeigen die Anwendung des Tiefenschärfe-Effektes aus einer Distanz von ca. \SI{50.0}{\meter} zur Oberfläche in zwei unterschiedlichen Regionen. Abbildung \ref{abb:res} (c) und (d) zeigen die gleichen Szenen bei Betrachtung aus einer simulierten Distanz von \SI{6.0}{\centi\meter} zur Schärfeebene. Abbildungen \ref{abb:res} (e) und (f) zeigen zum Vergleich die Anwendung eines linearen Unschärfefilters, der nach dem in Abbildung \ref{flickr} gezeigten Verfahren mithilfe eines linearen, vertikal verlaufenden Weichzeichnungsfilters erzeugt wurde.
 
 \begin{figure}[htbp]
 \centering
@@ -333,7 +332,7 @@ Die Beispielanwendung wird ohne Anwendung des Tiefenschärfe-Effektes bei einer 
 
 \section{Diskussion}
 
-\begin{figure*}[htbp]
+\begin{figure*}[p]
 	\centering
 	\subfigure[]{\includegraphics[height=1.75in]{Blockcraft-1-Difference}}
 	\qquad
@@ -344,9 +343,9 @@ Die Beispielanwendung wird ohne Anwendung des Tiefenschärfe-Effektes bei einer 
 
 Die Ergebnisse, nach Anwendung des beschriebenen Echtzeit-Tiefenschärfe-Effektes, entsprechen den Erwartungen. Die durch die Anwendung des Tilt-Shift-Effektes entstehenden Größenverhältnisse sind, aus subjektiver Sicht, korrekt und lassen sich mit einem Vergleich zu den von Held et. al. bereitgestellten Referenzbildern bestätigen. Der entstehende Effekt ist somit nicht nur für photorealistische Szenen interessant, sondern kann auch, wie durch die von uns vorgestellte Beispielszene bewiesen wird, auf synthetische Szenarien übertragen werden.
 
-Im Vergleich zu einem nachträglich auf das Bild angewendeten Linsenfilter (siehe Abbildung \ref{abb:res}), ergeben sich nur wenig Differenzen. Da das vorgestellte Verfahren physikalisch korrekt unter der Verwendung von Tiefenwerten arbeitet, kann ein genaueres Ergebnis erzielt werden. Dies äußert sich darin, dass, bei Nutzung des Linsenfilters, Objekte, die eigentlich auf der Schärfeebene liegen müssten, unscharf dargestellt werden und vice versa. Betrachtet man beispielsweise in Abbildung \ref{abb:res} (e) einen der Bäume im Bereich der Fokusebene, kann es zur Weichzeichnung von Baumspitzen kommen, obwohl diese bei Betrachtung der Tiefenwerte auf der Schärfeebene liegen müssten.
+Im Vergleich zu einem nachträglich auf das Bild angewendeten Linsenfilter (siehe Abbildung \ref{abb:res}), ergeben sich nur wenig Differenzen. Da das vorgestellte Verfahren physikalisch korrekt unter der Verwendung von Tiefenwerten arbeitet, kann ein genaueres Ergebnis erzielt werden. Dies äußert sich darin, dass, bei Nutzung des linear verlaufenden Unschärfeffektes, Objekte, die eigentlich auf der Schärfeebene liegen müssten, unscharf dargestellt werden und vice versa. Betrachtet man beispielsweise in Abbildung \ref{abb:res} (e) einen der Bäume im Bereich der Fokusebene, kann es zur Weichzeichnung von Baumspitzen kommen, obwohl diese bei Betrachtung der Tiefenwerte auf der Schärfeebene liegen müssten.
 
-Die beschriebenen Effekte können den in Abbildung \ref{abb:diff} gezeigten Farbdifferenzbildern entnommen werden. Deutliche Unterschiede sind innerhalb der Bilder schwarz hervorgehoben, während schwache oder nicht vorhandene Unterschiede als grau bzw. weiß zu erkennen sind. Das vorgestellte Verfahren hat, zusammen mit vielen weiteren Verfahren, Probleme an den Übergängen zwischen Vordergrundebene, Schärfeebene und Hintergrundebene. Objekte, die im Vordergrund im äußeren Bereich der Schärfeebene liegen und die Schärfeebene überlagern, erhalten eine harte Kante, da der Unschärfefilter lediglich einzelne Punkte innerhalb der CoC-Map betrachtet. Zudem lässt sich ein \emph{Ineinanderbluten} beobachten, da für die Erzeugung des Unschärfeeffektes die Farbwerte der umliegenden Pixel benötigt werden. Dieser Effekt tritt ebenfalls am Übergang zwischen Schärfe- und Hintergrundebene auf, was zu einer Art \emph{Glühen} an scharf dargestellten Entitäten führen kann.
+Die beschriebenen Effekte können den in Abbildung \ref{abb:diff} gezeigten Farbdifferenzbildern entnommen werden. Deutliche Unterschiede sind innerhalb der Bilder schwarz hervorgehoben, während schwache oder nicht vorhandene Unterschiede als grau bzw. weiß zu erkennen sind. Das vorgestellte Verfahren zeigt, zusammen mit vielen weiteren Verfahren, Artkefakte an den Übergängen zwischen Vordergrundebene, Schärfeebene und Hintergrundebene. Objekte, die im Vordergrund im äußeren Bereich der Schärfeebene liegen und die Schärfeebene überlagern, erhalten eine harte Kante, da der Unschärfefilter lediglich einzelne Punkte innerhalb der CoC-Map betrachtet. Zudem lässt sich ein \emph{Ineinanderbluten} beobachten, da für die Erzeugung des Unschärfeeffektes die Farbwerte der umliegenden Pixel benötigt werden. Dieser Effekt tritt ebenfalls am Übergang zwischen Schärfe- und Hintergrundebene auf, was zu einer Art \emph{Glühen} an scharf dargestellten Entitäten führen kann.
 
 \section{Zusammenfassung und Ausblick}
 
