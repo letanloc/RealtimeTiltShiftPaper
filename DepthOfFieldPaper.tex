@@ -177,15 +177,15 @@ Anhand der ermittelten Werte für den Circle of Confusion wird im letzten Schrit
 Um den Vorgang möglichst effizient zu gestalten, ist von der Verwendung eines Gauß-Filters abzusehen. Für jeden Diameter $c_{x,y}$ müsste an dieser Stelle eine entsprechend große Filter-Matrix bereitgestellt oder dynamisch berechnet werden. Eine Mehrfachausführung des Gauß-Filters ist ebenfalls keine geeignete Lösung.
 
 Als geeignete Alternative erweist sich die Poisson-Disk-Verteilung~\cite{Engel:2004uq}. Zur Erzeugung dieser wird zunächst eine Menge von Zufallswerten entsprechend der Poisson-Verteilung generiert. In einem zweiten Schritt werden Punkte eliminiert, die einen bestimmten Mindestabstand zu Nachbarpunkten unterschreiten. Die Poisson-Verteilung eignet sich, bei entsprechender Wahl der Parameter, als Näherung der Gauß-Verteilung, was die Nutzung als Unschärfefilter rechtfertigt. Für die Anwendung als Filterkern werden lediglich Punkte in einem bestimmten Radius betrachtet. Um den Filterkern zu verallgemeinern, ist der Radius des Einheitskreises zu wählen. Die Anzahl der ermittelten Samples ist für die Qualität des Effektes zuständig. Sollten für ein entsprechend großen Radius zu wenige Samples vorhanden sein, können sich im Endergebnis Artefakte in Form von Geisterbildern äußern.
-%Satz endet mit "ermittelt"
-Ausgehend von der Betrachtung eines bestimmten Punktes $\vec{p} = \left(x,y\right)^T$ kann der pro Sample $s_{i}$ zu berücksichtigende Punkt $\vec{p'}$ entsprechend Formel \ref{eq:poissp} ermittelt werden.
+
+Ausgehend von der Betrachtung eines bestimmten Punktes $\vec{p} = \left(x,y\right)^T$ kann der pro Sample $s_{i}$ zu berücksichtigende Punkt $\vec{p}_i$ entsprechend Formel \ref{eq:poissp} ermittelt werden.
 
 \begin{align}
 	 \label{eq:poissp}
-	\vec{p'} = \vec{p} \cdot s_i \cdot c_{x,y}
+	\vec{p}_i = \vec{p} \cdot s_i \cdot c_{x,y}
 \end{align}
-%und hier steht "ermittelt" schon wieder
-Die Farbwerte der entsprechenden Punkte können an dieser Stelle ermittelt und auf den ursprünglichen Punkt aufaddiert werden. Im Anschluss muss der Farbwert lediglich der Anzahl der verwendeten Samples entsprechend normalisiert werden. Abbildungen \ref{fig:poisson} (a) und (b) zeigen die Anwendung eines Filters mit dem Radius $r = 0.0$ bzw. $r = 1.0$ und 6 Samples.
+
+Die Farbwerte der entsprechenden Punkte können an dieser Stelle auf den betrachteten Punkt im Ursprung aufaddiert werden. Im Anschluss muss der Farbwert lediglich der Anzahl der verwendeten Samples entsprechend normalisiert werden. Abbildungen \ref{fig:poisson} (a) und (b) zeigen die Anwendung eines Filters mit dem Radius $r = 0.0$ bzw. $r = 1.0$ und 6 Samples.
 
 \begin{figure}[htbp]
 \centering
@@ -220,7 +220,7 @@ Unter Berücksichtigung der zuvor beschriebenen Parameter für die menschliche W
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=3.35in]{DoF-Graph}
-\caption{Durchmesser des CoCs für eine Linse der Größe $A \in [\SI{0.0}{\meter},\SI{2.0}{\meter}]$, $z1 \in [\SI{0.0}{\meter},\SI{150}{\meter}]$, $z_0 = \SI{75.0}{\meter}$, $s_0 =\SI{0.017}{\meter}$ bei Verwendung des Skalierungsfaktors $b = 28000$.}
+\caption{Durchmesser des CoCs ermittelt anhand von Formel \ref{eq:coc} für eine Linse der Größe $A \in [\SI{0.0}{\meter},\SI{2.0}{\meter}]$, $z1 \in [\SI{0.0}{\meter},\SI{150}{\meter}]$, $z_0 = \SI{75.0}{\meter}$, $s_0 =\SI{0.017}{\meter}$ bei Verwendung des Skalierungsfaktors $b = 28000$.}
 \label{abb:cocgraph}
 \end{figure}
 
@@ -260,7 +260,7 @@ Listing \ref{lst:coc} zeigt eine exemplarische Implementierung eines entsprechen
 
 \begin{lstlisting}[caption=Pseudocode für den Fragment-Shader zur Berechnung der CoC-Map.,language=pseudo, label={lst:coc}]
 fragment program DepthFragmentShader with parameters currentPoint, depthSample, z0, a, sceneDepth
-	// z0 entspricht z.B. 32.0
+	// z0 entspricht z.B. 75.0
 	// a entspricht z.B. 0.0046
 	set s0 to 0.017
 	set depthValue to depthSample at currentPoint
@@ -300,7 +300,14 @@ Die Referenzimplementierung wurde mithilfe von Ogre (Kurzform für \emph{Object-
 
 Die beschriebenen Shader wurden mithilfe des von Ogre bereitgestellten Material- sowie Kompositor-Systems zugeordnet. Da die Tiefenwerte getrennt von der eigentlichen Berechnung ermittelt werden müssen, wird eine sogenannte Render-Queue-Invocation verwendet, bei der der Shader für die Erzeugung der Depth-Map auf die Szenen-Objekte angewendet und das Gesamtergebnis in Form einer Textur für die weitere Verwendung vorbereitet wird. Für den Unschärfefilter wurden 32 Poisson-Disk-Samples pro Frame verwendet, wobei der Tiefenschärfe-Shader zur Verstärkung des Effektes zweifach ausgeführt wird.
 
-Für die Demonstration wurde eine spezielle Szene entwickelt, die eine Art \emph{Lego-Effekt} erzeugen soll. Die Szene besteht aus vielen einzelnen, quadratischen Blöcken, die durch einen fraktalen Algorithmus (dem Square-Diamond-Algorithmus) zu einem Terrain ausgelegt werden. Zudem werden für bestimmte, zufällig ermittelte Regionen, Seen und Schneeabschnitte erzeugt sowie Bäume in der Landschaft platziert. Die Szene besteht aus Blätter-, Sand-, Dreck-, Schnee-, Gras-, Holz- sowie Wasserblöcken, die mit einfachen Texturen à $16\times\SI{16}{px}$ versehen wurden. Die Dimensionen eines Blockes wurden so gewählt, dass die Proportionen geschätzt einem halben Meter in der realen Welt entsprechen. Bäume besitzen eine maximale Höhe von ca. $\SI{6.00}{\meter}$. Der Stil der Beispielszene orientiert sich am Computerspiel Minecraft~\cite{Mojang:2011zr}. Zur Verdeutlichung des Effektes kann sich innerhalb der Szene frei bewegt und bei Bedarf auf eine Vogelperspektive umgeschaltet werden. Abbildung \ref{abb:block} zeigt eine Aufnahme der Szene aus der Betrachtersicht. % Ego-Perspektive?
+Für die Demonstration wurde eine spezielle Szene entwickelt, die eine Art \emph{Lego-Effekt} erzeugen soll. Die Szene besteht aus vielen einzelnen, quadratischen Blöcken, die durch einen fraktalen Algorithmus (dem Square-Diamond-Algorithmus) zu einem Terrain ausgelegt werden. Zudem werden für bestimmte, zufällig ermittelte Regionen, Seen und Schneeabschnitte erzeugt sowie Bäume in der Landschaft platziert. Die Szene besteht aus Blätter-, Sand-, Dreck-, Schnee-, Gras-, Holz- sowie Wasserblöcken, die mit einfachen Texturen à $16\times\SI{16}{px}$ versehen wurden. Die Dimensionen eines Blockes wurden so gewählt, dass die Proportionen geschätzt einem halben Meter in der realen Welt entsprechen. Bäume besitzen eine maximale Höhe von ca. $\SI{6.00}{\meter}$. Der Stil der Beispielszene orientiert sich am Computerspiel Minecraft~\cite{Mojang:2011zr}. Zur Verdeutlichung des Effektes kann sich innerhalb der Szene frei bewegt und bei Bedarf auf eine Vogelperspektive umgeschaltet werden. Abbildung \ref{abb:block} zeigt eine Aufnahme der Szene aus der Sicht des Betrachters.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=3.35in]{Blockcraft-1}
+\caption{Blick in die Beispielszene bei normalen Größenverhätltnissen.}
+\label{abb:block}
+\end{figure}
 
 \begin{figure*}[p]
 	\centering
@@ -321,18 +328,11 @@ Für die Demonstration wurde eine spezielle Szene entwickelt, die eine Art \emph
 
 Abbildungen \ref{abb:res} (a) und (b) zeigen die Anwendung des Tiefenschärfe-Effektes aus einer Distanz von ca. \SI{50.0}{\meter} zur Oberfläche in zwei unterschiedlichen Regionen. Abbildung \ref{abb:res} (c) und (d) zeigen die gleichen Szenen bei Betrachtung aus einer simulierten Distanz von \SI{6.0}{\centi\meter} zur Schärfeebene. Abbildungen \ref{abb:res} (e) und (f) zeigen zum Vergleich die Anwendung eines linearen Unschärfefilters, der nach dem in Abbildung \ref{flickr} gezeigten Verfahren mithilfe eines linearen, vertikal verlaufenden Weichzeichnungsfilters erzeugt wurde.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=3.35in]{Blockcraft-1}
-\caption{Blick in die Beispielszene bei normalen Größenverhätltnissen.}
-\label{abb:block}
-\end{figure}
-
 Die Beispielanwendung wird ohne Anwendung des Tiefenschärfe-Effektes bei einer Darstellung eines Gebietes von $512 \times 512$ Blöcken mit $52$ Frames pro Sekunde (kurz FPS) ausgeführt. Nach Anwendung des Effektes sinkt der Wert auf $51\;\textnormal{FPS}$.
 
 \section{Diskussion}
 
-\begin{figure*}[p]
+\begin{figure*}[htb]
 	\centering
 	\subfigure[]{\includegraphics[height=1.75in]{Blockcraft-1-Difference}}
 	\qquad
