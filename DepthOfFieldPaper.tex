@@ -54,7 +54,7 @@
 
 \graphicspath{{Bilder/}}
 
-\title{Nutzung von Echtzeit-Tiefenschärfe-Effekten zur Beeinflussung von wahrgenommenen Größen- sowie Abstandsverhältnissen}
+\title{Nutzung von Echtzeit-Tiefenschärfe-Effekten zur Beeinflussung von wahrgenommenen Größen- und Abstandsverhältnissen}
 
 \author{Benjamin Glatzel\thanks{E-Mail: benjamin.glatzel@me.com}\\ Hochschule Darmstadt
 \and Dominik Wilhelm\thanks{E-Mail: dominik\_wilhelm@arcor.de}\\ Hochschule Darmstadt}
@@ -98,7 +98,7 @@ Unschärfe in Fotografien und Grafiken kann wahrgenommene Größen- und Abstands
 
 Für die Realisierung des Tilt-Shift-Effektes existieren drei bewährte Umsetzungsmöglichkeiten: die Verwendung von Tilt-Shift-Objektiven, die Anwendung eines vertikalen Unschärfefilters durch Postprocessing und die realitätsnahe, physikalische Berechnung von Tiefenschärfe. Während die ersten beiden Möglichkeiten bei Fotografien leicht angewendet werden können, sind für die realitätsnahe Berechnung Tiefeninformationen eine Grundvoraussetzung. Da bei der Entwicklung von Echtzeit-3D-Applikationen Tiefeninformationen ein grundlegender Bestandteil sind und die Ausrichtung eines vertikalen Unschärfefilters geschickt gewählt werden muss, eignet sich in diesem Szenario eine realitätsnahe Berechnung.
 
-Abbildung \ref{teaser} (a) und Abbildung \ref{teaser} (b) zeigen die Ergebnisse nach einer Echtzeit-Tiefenschärfe-Berechnung angewandt auf eine fraktal generierte Beispielszene. Die Parameter wurden für die Generierung der Abbildungen so gewählt, dass, unter Berücksichtigung der Eigenschaften des menschlichen Auges, eine fokussierte Distanz von $\SI{75.0}{\meter}$ auf  $\SI{6.0}{\centi\meter}$
+Abbildung \ref{teaser} (a) und Abbildung \ref{teaser} (b) zeigen die Ergebnisse nach einer Echtzeit-Tiefenschärfe-Berechnung angewandt auf eine fraktal generierte Beispielszene. Die Parameter wurden für die Generierung der Abbildungen so gewählt, dass, unter Berücksichtigung der Eigenschaften des menschlichen Auges, eine fokussierte Distanz von $\SI{75.0}{\meter}$ auf  $\SI{6.0}{\centi\meter}$ simuliert wird.
 
 Wie zu erkennen ist, eignen sich Echtzeitverfahren für die Erzeugung des Tilt-Shift-Effektes. Innerhalb des vorliegenden Papers wird ein einfacher Algorithmus beschrieben, der die Berechnung von Tiefenschärfe unter Berücksichtigung der menschlichen Wahrnehmung in Echtzeit ermöglicht. Durch dessen Anwendung können Größenverhältnisse betrachteter Szenen durch Defokussierung und Fokussierung manipuliert und an gewünschte Größenverhältnisse angepasst werden. Abschließend werden die Ergebnisse validiert und mit einer offline Reproduktion verglichen.
 
@@ -168,23 +168,23 @@ Der vorgestellte Algorithmus basiert, mit kleinen Variatonen, auf dem von T. Sch
 \label{fig:cocmap}
 \end{figure}
 
-Für die eigentliche Berechnung des Echtzeit-Tiefenschärfe-Effektes sind folgende Schritte notwendig: Zunächst müssen die jeweiligen Tiefenwerte für das aktuelle Blickfeld der Kamera ermittelt und für spätere Berechnungen bereitgestellt werden. Im zweiten Schritt muss, ausgehend von den ermittelten Tiefenwerten, der entsprechen Diameter für den Unschärfefilter unter Verwendung der zuvor genannten Formel für $c_1$ (Formel \ref{eq:coc}) für jeden Bildpunkt ermittelt werden. Sowohl die Tiefenwerte als auch die Durchmesserwerte des CoCs werden in der Praxis normalisiert und als Lookup-Table, in Form einer Textur, codiert. Abbildung \ref{fig:cocmap} zeigt die Visualisierung einer solchen Tabelle für den Circle of Confusion als Grauwertbild. 
+Für die eigentliche Berechnung des Echtzeit-Tiefenschärfe-Effektes sind folgende Schritte notwendig: Zunächst müssen die jeweiligen Tiefenwerte für das aktuelle Blickfeld der Kamera ermittelt und für spätere Berechnungen bereitgestellt werden. Im zweiten Schritt muss, ausgehend von den ermittelten Tiefenwerten, der entsprechende Diameter für den Unschärfefilter unter Verwendung der zuvor genannten Formel für $c_1$ (Formel \ref{eq:coc}) für jeden Bildpunkt ermittelt werden. Sowohl die Tiefenwerte als auch die Durchmesserwerte des CoCs werden in der Praxis normalisiert und als Lookup-Table, in Form einer Textur, codiert. Abbildung \ref{fig:cocmap} zeigt die Visualisierung einer solchen Tabelle für den Circle of Confusion als Grauwertbild. 
 
 Anhand der ermittelten Werte für den Circle of Confusion wird im letzten Schritt der eigentliche Tiefenschärfe-Effekt berechnet. Hierzu muss für jeden Bildpunkt entsprechend dem zuvor ermittelten Diameter $c_{x,y}$ ein Unschärfefilter angewendet werden. Die Schwierigkeit liegt an dieser Stelle darin, dass der Durchmesser und die Intensität des Filters variabel wählbar sein muss.
 
 \subsection{Nutzung einer Poisson-Disk-Verteilung als Weichzeichnungsfilter}
 
-Um den Vorgang möglichst effizient zu gestalten, ist von der Verwendung eines Gauß-Filters abzusehen. Für jeden Diameter $c_{x,y}$ müsste an dieser Stelle eine entsprechend große Filter-Matrix bereitgestellt oder dynamisch berechnet werden. Eine Mehrfachausführung des Gauß-Filters ist ebenfalls keine realistische Lösung.
+Um den Vorgang möglichst effizient zu gestalten, ist von der Verwendung eines Gauß-Filters abzusehen. Für jeden Diameter $c_{x,y}$ müsste an dieser Stelle eine entsprechend große Filter-Matrix bereitgestellt oder dynamisch berechnet werden. Eine Mehrfachausführung des Gauß-Filters ist ebenfalls keine geeignete Lösung.
 
 Als geeignete Alternative erweist sich die Poisson-Disk-Verteilung~\cite{Engel:2004uq}. Zur Erzeugung dieser wird zunächst eine Menge von Zufallswerten entsprechend der Poisson-Verteilung generiert. In einem zweiten Schritt werden Punkte eliminiert, die einen bestimmten Mindestabstand zu Nachbarpunkten unterschreiten. Die Poisson-Verteilung eignet sich, bei entsprechender Wahl der Parameter, als Näherung der Gauß-Verteilung, was die Nutzung als Unschärfefilter rechtfertigt. Für die Anwendung als Filterkern werden lediglich Punkte in einem bestimmten Radius betrachtet. Um den Filterkern zu verallgemeinern, ist der Radius des Einheitskreises zu wählen. Die Anzahl der ermittelten Samples ist für die Qualität des Effektes zuständig. Sollten für ein entsprechend großen Radius zu wenige Samples vorhanden sein, können sich im Endergebnis Artefakte in Form von Geisterbildern äußern.
-
+%Satz endet mit "ermittelt"
 Ausgehend von der Betrachtung eines bestimmten Punktes $\vec{p} = \left(x,y\right)^T$ kann der pro Sample $s_{i}$ zu berücksichtigende Punkt $\vec{p'}$ entsprechend Formel \ref{eq:poissp} ermittelt werden.
 
 \begin{align}
 	 \label{eq:poissp}
 	\vec{p'} = \vec{p} \cdot s_i \cdot c_{x,y}
 \end{align}
-
+%und hier steht "ermittelt" schon wieder
 Die Farbwerte der entsprechenden Punkte können an dieser Stelle ermittelt und auf den ursprünglichen Punkt aufaddiert werden. Im Anschluss muss der Farbwert lediglich der Anzahl der verwendeten Samples entsprechend normalisiert werden. Abbildungen \ref{fig:poisson} (a) und (b) zeigen die Anwendung eines Filters mit dem Radius $r = 0.0$ bzw. $r = 1.0$ und 6 Samples.
 
 \begin{figure}[htbp]
@@ -215,7 +215,7 @@ Geht man beispielsweise von $s_0 = \SI{0.017}{\meter}$ sowie $A = \SI{0.0046}{\m
 \subsection{Abbildung der Größenverhältnisse}
 \label{sec:proportions}
 
-Unter Berücksichtigung der zuvor beschriebenen Parameter für die menschliche Wahrnehmung und Formel \ref{eq:coc}, kann der Durchmessers des Circle of Confusion bei einer Projektion auf die menschliche Netzhaut berechnet werden. Für eine Simulation muss die Verbindung zwischen dem beschriebenen Durchmesser des Poisson-Disk-Filters und dem Durchmesser des CoCs hergestellt werden. Hierzu wurden die Ergebnisbilder von Held et. al. betrachtet und der jeweilige Durchmesser des angewendeten Filters anhand eines Gauß-Weichzeichnungs-Filters approximiert \cite{Held:2010cr}. Mithilfe von Photoshop CS5 wurde für eine der beschriebenen Szenen aus einer simulierten Distanz $\hat z_0 = \SI{0.06}{\meter}$ mit $\hat A = \SI{60.0}{\meter}$, $z_0 = \SI{785.0}{\meter}$, $s_0 = \SI{0.017}{\meter}$ und $A = \SI{0.046}{\meter}$ ein maximaler Unschärfe-Radius von $r = \SI{4.6}{px}$ ermittelt. Bei Anwendung des Poisson-Disk-Filters muss für den Durchmesser des maximalen CoCs $c_{\textnormal{max}} = \SI{4.6}{px} \cdot 2 = \SI{9.2}{px}$ gewählt werden.
+Unter Berücksichtigung der zuvor beschriebenen Parameter für die menschliche Wahrnehmung und Formel \ref{eq:coc}, kann der Durchmesser des Circle of Confusion bei einer Projektion auf die menschliche Netzhaut berechnet werden. Für eine Simulation muss die Verbindung zwischen dem beschriebenen Durchmesser des Poisson-Disk-Filters und dem Durchmesser des CoCs hergestellt werden. Hierzu wurden die Ergebnisbilder von Held et. al. betrachtet und der jeweilige Durchmesser des angewendeten Filters anhand eines Gauß-Weichzeichnungs-Filters approximiert \cite{Held:2010cr}. Mithilfe von Photoshop CS5 wurde für eine der beschriebenen Szenen aus einer simulierten Distanz $\hat z_0 = \SI{0.06}{\meter}$ mit $\hat A = \SI{60.0}{\meter}$, $z_0 = \SI{785.0}{\meter}$, $s_0 = \SI{0.017}{\meter}$ und $A = \SI{0.046}{\meter}$ ein maximaler Unschärfe-Radius von $r = \SI{4.6}{px}$ ermittelt. Bei Anwendung des Poisson-Disk-Filters muss für den Durchmesser des maximalen CoCs $c_{\textnormal{max}} = \SI{4.6}{px} \cdot 2 = \SI{9.2}{px}$ gewählt werden.
 
 \begin{figure}[htbp]
 \centering
@@ -224,7 +224,7 @@ Unter Berücksichtigung der zuvor beschriebenen Parameter für die menschliche W
 \label{abb:cocgraph}
 \end{figure}
 
-Anhand der Linsen-Parameter der betrachteten Beispielszene kann der Skalierungsfaktor $b = 28000$ geschätzt werden. Unter Verwendung dessen entspricht die Intensität der dargestellten Unschärfe in etwa der, die bei Betrachtung der Szene aus der simulierten Distanz tatsächlich entstehen würde~\cite{Held:2010cr}. Abbildung \ref{abb:cocgraph} zeigt den Durchmesser des CoC für ein Beispielszenario nach Anwendung der beschriebenen Skalierung.
+Anhand der Linsen-Parameter der betrachteten Beispielszene kann der Skalierungsfaktor $b = 28000$ abgeschätzt werden. Unter Verwendung dessen entspricht die Intensität der dargestellten Unschärfe in etwa der, die bei Betrachtung der Szene aus der simulierten Distanz tatsächlich entstehen würde~\cite{Held:2010cr}. Abbildung \ref{abb:cocgraph} zeigt den Durchmesser des CoC für ein Beispielszenario nach Anwendung der beschriebenen Skalierung.
 
 \section{Berechnung der Tiefenschärfe mithilfe von Shadern}
 
@@ -296,11 +296,11 @@ end
 
 \section{Ergebnisse}
 
-Die Referenzimplementierung wurde mithilfe von Ogre (Kurzform für \emph{Object-Oriented Graphics Rendering Engine})~\cite{Torus:2011vn} unter Verwendung von Mac OS 10.6.6 und OpenGL sowie der Shader-Hochsprache Cg (Kurzform für \emph{C for Graphics}) durchgeführt. Als Grafikkarte wurde eine ATI Radeon 5870 mit 1 GB Grafikspeicher eingesetzt. Der Testrechner besitzt einen Intel Xeon 6-Kern-Prozessor mit 3.33 GHz pro Kern, 12 Threads und insgesamt 8 GB Arbeitsspeicher. Für die Darstellung wurde ein Weitbildmonitor mit ein Bilddiagonalen von $24''$ und einer Auflösung von $1920\times\SI{1200}{px}$ verwendet.
+Die Referenzimplementierung wurde mithilfe von Ogre (Kurzform für \emph{Object-Oriented Graphics Rendering Engine})~\cite{Torus:2011vn} unter Verwendung von Mac OS 10.6.6 und OpenGL sowie der Shader-Hochsprache Cg (Kurzform für \emph{C for Graphics}) durchgeführt. Als Grafikkarte wurde eine ATI Radeon 5870 mit 1 GB Grafikspeicher eingesetzt. Der Testrechner besitzt einen Intel Xeon 6-Kern-Prozessor mit 3.33 GHz pro Kern, 12 Threads und insgesamt 8 GB Arbeitsspeicher. Für die Darstellung wurde ein Weitbildmonitor mit einer Bilddiagonalen von $24''$ und einer Auflösung von $1920\times\SI{1200}{px}$ verwendet.
 
 Die beschriebenen Shader wurden mithilfe des von Ogre bereitgestellten Material- sowie Kompositor-Systems zugeordnet. Da die Tiefenwerte getrennt von der eigentlichen Berechnung ermittelt werden müssen, wird eine sogenannte Render-Queue-Invocation verwendet, bei der der Shader für die Erzeugung der Depth-Map auf die Szenen-Objekte angewendet und das Gesamtergebnis in Form einer Textur für die weitere Verwendung vorbereitet wird. Für den Unschärfefilter wurden 32 Poisson-Disk-Samples pro Frame verwendet, wobei der Tiefenschärfe-Shader zur Verstärkung des Effektes zweifach ausgeführt wird.
 
-Für die Demonstration wurde eine spezielle Szene entwickelt, die einen \emph{Lego-Effekt} vermitteln soll. Die Szene besteht aus vielen einzelnen, quadratischen Blöcken, die durch einen fraktalen Algorithmus (dem Square-Diamond-Algorithmus) zu einem Terrain ausgelegt werden. Zudem werden für bestimmte, zufällig ermittelte Regionen, Seen und Schneeabschnitte erzeugt sowie Bäume in der Landschaft platziert. Die Szene besteht aus Blätter-, Sand-, Dreck-, Schnee-, Gras-, Holz- sowie Wasserblöcken, die mit einfachen Texturen à $16\times\SI{16}{px}$ versehen wurden. Die Dimensionen eines Blockes wurden so gewählt, dass die Proportionen geschätzt einem halben Meter in der realen Welt entsprechen. Bäume besitzen eine maximale Höhe von  $\approx \SI{6.00}{\meter}$. Der Stil der Beispielszene orientiert sich am Computerspiel Minecraft~\cite{Mojang:2011zr}. Zur Verdeutlichung des Effektes kann sich innerhalb der Szene frei bewegt und bei Bedarf auf eine Vogelperspektive umgeschaltet werden. Abbildung \ref{abb:block} zeigt eine Aufnahme der Szene aus der Betrachtersicht.
+Für die Demonstration wurde eine spezielle Szene entwickelt, die eine Art \emph{Lego-Effekt} erzeugen soll. Die Szene besteht aus vielen einzelnen, quadratischen Blöcken, die durch einen fraktalen Algorithmus (dem Square-Diamond-Algorithmus) zu einem Terrain ausgelegt werden. Zudem werden für bestimmte, zufällig ermittelte Regionen, Seen und Schneeabschnitte erzeugt sowie Bäume in der Landschaft platziert. Die Szene besteht aus Blätter-, Sand-, Dreck-, Schnee-, Gras-, Holz- sowie Wasserblöcken, die mit einfachen Texturen à $16\times\SI{16}{px}$ versehen wurden. Die Dimensionen eines Blockes wurden so gewählt, dass die Proportionen geschätzt einem halben Meter in der realen Welt entsprechen. Bäume besitzen eine maximale Höhe von ca. $\SI{6.00}{\meter}$. Der Stil der Beispielszene orientiert sich am Computerspiel Minecraft~\cite{Mojang:2011zr}. Zur Verdeutlichung des Effektes kann sich innerhalb der Szene frei bewegt und bei Bedarf auf eine Vogelperspektive umgeschaltet werden. Abbildung \ref{abb:block} zeigt eine Aufnahme der Szene aus der Betrachtersicht. % Ego-Perspektive?
 
 \begin{figure*}[p]
 	\centering
