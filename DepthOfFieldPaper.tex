@@ -192,11 +192,11 @@ Um den Vorgang möglichst effizient zu gestalten, ist von der Verwendung eines G
 
 Als geeignete Alternative erweist sich die Poisson-Disk-Verteilung~\cite{Engel:2004uq}. Zur Erzeugung dieser wird zunächst eine Menge von Zufallswerten entsprechend der Poisson-Verteilung generiert. In einem zweiten Schritt werden Punkte eliminiert, die einen bestimmten Mindestabstand zu Nachbarpunkten unterschreiten. Die Poisson-Verteilung eignet sich, bei entsprechender Wahl der Parameter, als Näherung der Gauß-Verteilung, was die Nutzung als Unschärfefilter rechtfertigt. Für die Anwendung als Filterkern werden lediglich Punkte in einem bestimmten Radius betrachtet. Um den Filterkern zu verallgemeinern, ist der Radius des Einheitskreises zu wählen. Die Anzahl der ermittelten Samples ist für die Qualität des Effektes zuständig. Sollten für ein entsprechend großen Radius zu wenige Samples vorhanden sein, können sich im Endergebnis Artefakte in Form von Geisterbildern äußern.
 
-Ausgehend von der Betrachtung eines bestimmten Punktes $\vec{p} = \left(x,y\right)^T$ kann der pro Sample $s_{i}$ zu berücksichtigende Punkt $\vec{p}_i$ entsprechend Formel \ref{eq:poissp} ermittelt werden.
+Ausgehend von der Betrachtung eines bestimmten Punktes $\vec{p} = \left(x,y\right)^T$ kann der pro Sample $\vec{s}_{i}$ zu berücksichtigende Punkt $\vec{p}_i$ entsprechend Formel \ref{eq:poissp} ermittelt werden.
 
 \begin{align}
 	 \label{eq:poissp}
-	\vec{p}_i = \vec{p} \cdot s_i \cdot c_{x,y}
+	\vec{p}_i = \vec{p} \cdot \vec{s}_i \cdot c_{x,y}
 \end{align}
 
 Die Farbwerte der entsprechenden Punkte können an dieser Stelle auf den betrachteten Punkt im Ursprung aufaddiert werden. Im Anschluss muss der Farbwert lediglich der Anzahl der verwendeten Samples entsprechend normalisiert werden. Abbildungen \ref{fig:poisson} (a) und (b) zeigen die Anwendung eines Filters mit dem Radius $r = 0.0$ bzw. $r = 1.0$ und 6 Samples.
